@@ -71,7 +71,7 @@ namespace Panacea.Modules.Meditech
         }
 
         private int Timeout = 600;
-  
+
         void _timer_Elapsed(object sender, EventArgs e)
         {
             if (IsMeditechRunning())
@@ -270,12 +270,9 @@ namespace Panacea.Modules.Meditech
 
         public async Task BeginInit()
         {
-            
+
             //todo _comm.RegisterUri("meditech", OnUri);
-            if (_core.TryGetUiManager(out IUiManager ui))
-            {
-                ui.Resumed += Host_Resumed;
-            }
+
             try
             {
                 var response = await _core.HttpClient.GetObjectAsync<GetMeditechSettingsResponse>("meditech/get_settings/");
@@ -301,7 +298,7 @@ namespace Panacea.Modules.Meditech
             {
                 await OnUriAsync(uri);
             });
-            
+
             return null;
         }
 
@@ -450,7 +447,7 @@ namespace Panacea.Modules.Meditech
             }
         }
 
-private static int LevenshteinDistance(string s, string t)
+        private static int LevenshteinDistance(string s, string t)
         {
             int n = s.Length;
             int m = t.Length;
@@ -527,6 +524,10 @@ private static int LevenshteinDistance(string s, string t)
 
         public Task EndInit()
         {
+            if (_core.TryGetUiManager(out IUiManager ui))
+            {
+                ui.Resumed += Host_Resumed;
+            }
             return Task.CompletedTask;
         }
 
