@@ -1,0 +1,21 @@
+﻿<Window x:Class="Panacea.Modules.Meditech.LoadingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserPlugins.Meditech"
+        mc:Ignorable="d"
+        Title="LoadingWindow" Height="450" Width="800"
+        Topmost="True"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--<controls:SpinningWheel VerticalAlignment="Bottom"  Margin="0 0 0 40" Background="Black" Foreground="Black"/>-->
+        <TextBlock Grid.Row="1" FontSize="32" Text="Please wait, Meditech is loading..." TextAlignment="Center" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
