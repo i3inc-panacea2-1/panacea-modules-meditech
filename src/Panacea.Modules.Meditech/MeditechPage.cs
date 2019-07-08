@@ -15,6 +15,7 @@ using Windows.UserActivity;
 using Panacea.Modularity.UiManager;
 using Panacea.Core;
 using System.Web;
+using Panacea.Modularity.AppBar;
 
 namespace Panacea.Modules.Meditech
 {
@@ -540,7 +541,11 @@ namespace Panacea.Modules.Meditech
         {
             try
             {
-
+                if(_core.TryGetAppBar(out IAppBar bar))
+                {
+                    bar.Show();
+                    return;
+                }
                 //_webSocket.PopularNotifyPage("Meditech");
                 OpenMeditech(true);
                 await Task.Delay(1000);
