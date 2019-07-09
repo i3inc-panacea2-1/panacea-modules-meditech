@@ -544,7 +544,6 @@ namespace Panacea.Modules.Meditech
                 if(_core.TryGetAppBar(out IAppBar bar))
                 {
                     bar.Show();
-                    return;
                 }
                 //_webSocket.PopularNotifyPage("Meditech");
                 OpenMeditech(true);
