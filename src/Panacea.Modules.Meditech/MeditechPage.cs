@@ -251,6 +251,10 @@ namespace Panacea.Modules.Meditech
                 {
                 }
             }
+            if (_core.TryGetAppBar(out IAppBar bar))
+            {
+                bar.Hide();
+            }
         }
 
         public static bool IsService(int pID)
@@ -541,12 +545,15 @@ namespace Panacea.Modules.Meditech
         {
             try
             {
-                if(_core.TryGetAppBar(out IAppBar bar))
-                {
-                    bar.Show();
-                }
+              
                 //_webSocket.PopularNotifyPage("Meditech");
-                OpenMeditech(true);
+                if(await OpenMeditech(true))
+                {
+                    if (_core.TryGetAppBar(out IAppBar bar))
+                    {
+                        bar.Show();
+                    }
+                }
                 await Task.Delay(1000);
                 _timer.Start();
                 _checker.Start();
@@ -557,7 +564,7 @@ namespace Panacea.Modules.Meditech
             }
         }
 
-        private async void OpenMeditech(bool deleteLastUser = false)
+        private async Task<bool> OpenMeditech(bool deleteLastUser = false)
         {
             if (_core.TryGetUiManager(out IUiManager ui))
             {
@@ -574,7 +581,7 @@ namespace Panacea.Modules.Meditech
                 if (path == null || !File.Exists(path))
                 {
                     ui.Toast("Meditech not found");
-                    return;
+                    return false;
                 }
                 Process.Start(path);
                 ui.Pause();
@@ -590,11 +597,12 @@ namespace Panacea.Modules.Meditech
                 {
                     //Host.Logger.Debug(this, "Meditech window not found");
                     CloseMeditech();
-                    return;
+                    return false;
                 }
                 _timer.Start();
                 _checker.Start();
             }
+            return true;
         }
 
         private void DeleteMeditechData()
