@@ -587,9 +587,9 @@ namespace Panacea.Modules.Meditech
                 ui.Pause();
                 var w = FindWindow(null, "Enter Network Password");
                 var i = 0;
-                while (w == IntPtr.Zero && i < 1000)
+                while (w == IntPtr.Zero && i < 100)
                 {
-                    await Task.Delay(300);
+                    await Task.Delay(100);
                     w = FindWindow(null, "Enter Network Password");
                     i++;
                 }
